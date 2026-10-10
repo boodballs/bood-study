@@ -32,14 +32,20 @@ Free: **3 study kits a week**, no card needed.
 ## Stack
 
 Next.js 16 (App Router) · React 19 · Tailwind 4 · SQLite via `better-sqlite3`
-· Together.ai (`GLM-5.3-Flash`) · Resend (transactional email) · Cloudflare
-Turnstile (optional).
+· Resend (transactional email) · Cloudflare Turnstile (optional).
+
+**Works with any OpenAI-compatible provider.** The AI call is a plain
+`POST /v1/chat/completions` — point `AI_BASE_URL` at Together.ai (default),
+OpenAI, Groq, OpenRouter, a local Ollama or LM Studio, and set `AI_API_KEY` +
+`AI_MODEL` (legacy `TOGETHER_*` names still honored). The prompt asks for
+strict JSON with one retry + tolerant extraction, so it is tolerant of
+provider quirks.
 
 ## Self-hosting
 
 ```bash
 npm install
-cp .env.example .env   # fill in TOGETHER_API_KEY, NEXT_PUBLIC_SITE_URL
+cp .env.example .env   # fill in AI_API_KEY, NEXT_PUBLIC_SITE_URL
 npm run build && npm start
 ```
 
@@ -47,7 +53,7 @@ Environment variables (see `.env.example`):
 
 | Variable | Purpose |
 |----------|---------|
-| `TOGETHER_API_KEY` / `TOGETHER_MODEL` | AI generation |
+| `AI_BASE_URL` / `AI_API_KEY` / `AI_MODEL` | any OpenAI-compatible provider |
 | `NEXT_PUBLIC_SITE_URL` | canonical URL (email links) |
 | `RESEND_API_KEY` / `EMAIL_FROM` | verification + password-reset email |
 | `DAILY_GLOBAL_LIMIT` | global daily generation fuse |

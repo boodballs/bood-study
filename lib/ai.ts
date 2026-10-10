@@ -6,8 +6,11 @@ import type { Flashcard, KeyTerm, QuizQuestion, StudySet } from "./types";
 // default 300s header/body timeouts so long generations survive.
 setGlobalDispatcher(new Agent({ headersTimeout: 600000, bodyTimeout: 600000 }));
 
-const ENDPOINT = "https://api.together.xyz/v1/chat/completions";
-const MODEL = process.env.TOGETHER_MODEL || "zai-org/GLM-5.3-Flash";
+// Any OpenAI-compatible provider works: set AI_BASE_URL + AI_API_KEY + AI_MODEL
+// (defaults point at Together.ai; legacy TOGETHER_* names still honored).
+const BASE_URL = process.env.AI_BASE_URL || "https://api.together.xyz/v1";
+const ENDPOINT = `${BASE_URL.replace(/\/$/, "")}/chat/completions`;
+const MODEL = process.env.AI_MODEL || process.env.TOGETHER_MODEL || "zai-org/GLM-5.3-Flash";
 
 const SYSTEM_PROMPT = `You are an expert study-materials author for university students. You receive the text of a document (lecture notes, slides, a textbook chapter, an article) and produce a complete study kit as STRICT JSON.
 
@@ -104,7 +107,7 @@ function validateStudySet(parsed: unknown): StudySet {
 }
 
 async function callTogether(messages: unknown[]): Promise<{ raw: string; finishReason: string }> {
-  const key = process.env.TOGETHER_API_KEY;
+  const key = process.env.AI_API_KEY || process.env.TOGETHER_API_KEY;
   if (!key) throw new Error("no api key");
   const res = await fetch(ENDPOINT, {
     method: "POST",
