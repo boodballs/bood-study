@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+data
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+next-env.d.ts
+
+# copyrighted test material — never ship
+/Breatheology-Ebook-English.pdf
+/*.pdf

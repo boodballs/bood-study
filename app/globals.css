@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: #faf9f6;
+  color: #1c1917;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: #7c3aed;
+  color: #fff;
+}
+
+/* ---- rendered markdown (.md view) ---- */
+.md-body {
+  line-height: 1.7;
+  font-size: 0.975rem;
+  color: #292524;
+  word-break: break-word;
+}
+.md-body > :first-child {
+  margin-top: 0;
+}
+.md-body h1,
+.md-body h2,
+.md-body h3,
+.md-body h4 {
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 1.6em 0 0.5em;
+  color: #1c1917;
+}
+.md-body h1 {
+  font-size: 1.5rem;
+}
+.md-body h2 {
+  font-size: 1.25rem;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #e7e5e4;
+}
+.md-body h3 {
+  font-size: 1.08rem;
+}
+.md-body p {
+  margin: 0.75em 0;
+}
+.md-body ul,
+.md-body ol {
+  margin: 0.75em 0;
+  padding-left: 1.4em;
+}
+.md-body ul {
+  list-style: disc;
+}
+.md-body ol {
+  list-style: decimal;
+}
+.md-body li {
+  margin: 0.3em 0;
+}
+.md-body li > ul,
+.md-body li > ol {
+  margin: 0.2em 0;
+}
+.md-body strong {
+  font-weight: 650;
+  color: #1c1917;
+}
+.md-body a {
+  color: #6d28d9;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.md-body blockquote {
+  margin: 1em 0;
+  padding: 0.4em 1em;
+  border-left: 3px solid #c4b5fd;
+  background: #f5f3ff;
+  border-radius: 0 8px 8px 0;
+  color: #4c1d95;
+}
+.md-body code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+  background: #f1eefe;
+  color: #5b21b6;
+  padding: 0.15em 0.4em;
+  border-radius: 5px;
+}
+.md-body pre {
+  margin: 1em 0;
+  padding: 1em;
+  background: #1c1917;
+  color: #e7e5e4;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+.md-body pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+.md-body table {
+  width: 100%;
+  margin: 1em 0;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.md-body table td,
+.md-body table th {
+  white-space: normal;
+}
+.md-body th,
+.md-body td {
+  border: 1px solid #e7e5e4;
+  padding: 0.45em 0.7em;
+  text-align: left;
+  vertical-align: top;
+}
+.md-body th {
+  background: #f5f3ff;
+  font-weight: 650;
+}
+.md-body hr {
+  margin: 1.5em 0;
+  border: 0;
+  border-top: 1px solid #e7e5e4;
+}
+
+/* ---- flashcard 3D flip ---- */
+.flip-scene {
+  perspective: 1400px;
+}
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.flip-inner.flipped {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: rise 0.35s ease-out both;
+}
