@@ -609,6 +609,15 @@ export default function Home({
               className="underline underline-offset-2 hover:text-violet-700"
             >
               boodautomates.com
+            </a>{" "}
+            ·{" "}
+            <a
+              href="https://github.com/boodballs/bood-study"
+              target="_blank"
+              rel="noreferrer"
+              className="underline underline-offset-2 hover:text-violet-700"
+            >
+              source code
             </a>
           </p>
         </div>
